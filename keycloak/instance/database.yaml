@@ -3,6 +3,15 @@ kind: Database
 metadata:
   name: keycloak
 spec:
+  db:
+    vendor: postgres
+    host: cluster-rw.postgresql-system.svc.cluster.local
+    usernameSecret:
+      name: keycloak-db-user
+      key: username
+    passwordSecret:
+      name: keycloak-db-user
+      key: password
   name: keycloak
   owner: keycloak
   cluster:
@@ -10,34 +19,3 @@ spec:
   # extensions:
   # - name: bloom
   #   ensure: present
----
-apiVersion: generators.external-secrets.io/v1alpha1
-kind: Password
-metadata:
-  name: generator
-spec:
-  length: 42
-  digits: 5
-  symbols: 5
-  symbolCharacters: "-_$@"
-  noUpper: false
-  allowRepeat: true
----
-apiVersion: external-secrets.io/v1
-kind: ExternalSecret
-metadata:
-  name: keycloak
-spec:
-  refreshInterval: "0"
-  target:
-    name: keycloak-db-user
-    template:
-      metadata:
-        annotations:
-          replicator.v1.mittwald.de/replicate-to: "postgresql-system"
-  dataFrom:
-  - sourceRef:
-      generatorRef:
-        apiVersion: generators.external-secrets.io/v1alpha1
-        kind: Password
-        name: generator

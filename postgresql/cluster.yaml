@@ -20,3 +20,5 @@ spec:
       inRoles:
         - pg_monitor
         - pg_signal_backend
+      passwordSecret:
+        name: keycloak-db-user
