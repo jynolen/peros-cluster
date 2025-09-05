@@ -30,7 +30,7 @@ metadata:
 spec:
   refreshInterval: "0"
   target:
-    name: keycloak
+    name: keycloak-db-user
     template:
       metadata:
         annotations:
