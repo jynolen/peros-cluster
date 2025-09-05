@@ -10,3 +10,18 @@ spec:
   # extensions:
   # - name: bloom
   #   ensure: present
+---
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: keycloak
+spec:
+  refreshInterval: "0"
+  target:
+    name: keycloak
+  dataFrom:
+  - sourceRef:
+      generatorRef:
+        apiVersion: generators.external-secrets.io/v1alpha1
+        kind: Password
+        name: external-secrets/generator
