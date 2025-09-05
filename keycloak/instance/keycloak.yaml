@@ -7,6 +7,7 @@ spec:
   db:
     vendor: postgres
     host: cluster-rw.postgresql-system.svc.cluster.local
+    database: keycloak-db
     usernameSecret:
       name: keycloak-db-user
       key: username
@@ -16,6 +17,6 @@ spec:
   http:
     tlsSecret: example-tls-secret
   hostname:
-    hostname: test.keycloak.org
+    hostname: keycloak.jynolen.fr
   proxy:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
