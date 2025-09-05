@@ -3,15 +3,6 @@ kind: Database
 metadata:
   name: keycloak
 spec:
-  db:
-    vendor: postgres
-    host: cluster-rw.postgresql-system.svc.cluster.local
-    usernameSecret:
-      name: keycloak-db-user
-      key: username
-    passwordSecret:
-      name: keycloak-db-user
-      key: password
   name: keycloak
   owner: keycloak
   cluster:

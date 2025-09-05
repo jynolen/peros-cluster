@@ -6,12 +6,12 @@ spec:
   instances: 1
   db:
     vendor: postgres
-    host: postgres-db
+    host: cluster-rw.postgresql-system.svc.cluster.local
     usernameSecret:
-      name: keycloak-db-secret
+      name: keycloak-db-user
       key: username
     passwordSecret:
-      name: keycloak-db-secret
+      name: keycloak-db-user
       key: password
   http:
     tlsSecret: example-tls-secret
