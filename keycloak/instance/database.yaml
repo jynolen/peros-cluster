@@ -8,7 +8,8 @@ spec:
   name: keycloak-db
   owner: keycloak
   cluster:
-    name: postgresql-system/cluster
+    name: cluster
   # extensions:
   # - name: bloom
   #   ensure: present
+
