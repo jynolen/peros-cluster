@@ -11,7 +11,7 @@ spec:
     size: 4Gi
   managed:
     roles:
-    - name: keycloak-user
+    - name: keycloak
       ensure: present
       connectionLimit: -1
       comment: KeycloakUser
