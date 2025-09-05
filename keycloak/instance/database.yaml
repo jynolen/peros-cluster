@@ -2,6 +2,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Database
 metadata:
   name: keycloak
+  namespace: postgresql-system
 spec:
   ensure: present 
   name: keycloak-db
