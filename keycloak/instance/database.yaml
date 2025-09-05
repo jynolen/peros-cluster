@@ -31,9 +31,10 @@ spec:
   refreshInterval: "0"
   target:
     name: keycloak
-    metadata:
-      annotations:
-        replicator.v1.mittwald.de/replicate-to: "postgresql-system"
+    template:
+      metadata:
+        annotations:
+          replicator.v1.mittwald.de/replicate-to: "postgresql-system"
   dataFrom:
   - sourceRef:
       generatorRef:
