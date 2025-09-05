@@ -3,6 +3,7 @@ kind: Database
 metadata:
   name: keycloak
 spec:
+  ensure: absent
   name: keycloak
   owner: keycloak
   cluster:
