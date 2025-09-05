@@ -15,7 +15,7 @@ spec:
       name: keycloak-db-user
       key: password
   http:
-    tlsSecret: example-tls-secret
+    httpEnabled: false
   hostname:
     hostname: keycloak.jynolen.fr
   proxy:
