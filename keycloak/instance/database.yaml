@@ -3,7 +3,7 @@ kind: Database
 metadata:
   name: keycloak
 spec:
-  ensure: absent
+  # ensure: absent
   name: keycloak-db
   owner: keycloak
   cluster:
