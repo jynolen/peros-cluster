@@ -14,8 +14,8 @@ spec:
     passwordSecret:
       name: keycloak-db-user
       key: password
-  http:
-    httpEnabled: false
+  ingress:
+    enabled: false
   hostname:
     hostname: keycloak.jynolen.fr
   proxy:
