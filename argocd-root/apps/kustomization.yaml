@@ -13,5 +13,5 @@ resources:
   - longhorn.yaml
   - postgresql.yaml
   - keycloak.yaml
-  - reflector.yaml
+  - kubernetes-replicator.yaml
   - external-secrets.yaml
