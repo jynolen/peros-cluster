@@ -1,0 +1,14 @@
+write-kubeconfig-mode: "0640"
+data-dir: /data/k3s
+bind-address: 0.0.0.0
+cluster-init: true
+cluster-cidr: 10.0.128.0/17
+service-cidr: 10.0.0.0/17
+cluster-dns: 10.0.0.255
+default-local-storage-path: /data
+disable:
+- traefik
+- local-storage
+- runtimes
+- servicelb
+disable-helm-controller: true

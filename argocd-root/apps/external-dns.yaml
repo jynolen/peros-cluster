@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: https://kubernetes-sigs.github.io/external-dns/
+    targetRevision: 1.18.0
+    chart: external-dns
+    helm:
+      parameters:
+      - name: provider.name
+        value: cloudflare
+      - name: logLevel
+        value: warning
+      values: |-
+        sources: ["gateway-httproute", "gateway-tcproute", "gateway-tlsroute", "gateway-udproute"]
+        env:
+          - name: CF_API_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: cloudflare-api-key
+                key: apiKey
+          - name: CF_API_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: cloudflare-api-key
+                key: email
+          - name: EXTERNAL_DNS_CLOUDFLARE_PROXIED
+            value: "true"
+  - repoURL: https://github.com/jynolen/peros-cluster
+    path: external-dns
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-dns
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

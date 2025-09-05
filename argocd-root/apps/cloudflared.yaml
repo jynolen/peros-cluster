@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloudflared
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: https://community-charts.github.io/helm-charts
+    targetRevision: 2.1.2
+    chart: cloudflared
+    helm:
+      parameters:
+        - name: tunnelSecrets.existingConfigJsonFileSecret.name
+          value: tunnel-secret-credential
+        - name: tunnelSecrets.existingPemFileSecret.name
+          value: tunnel-secret-cert
+        - name: tunnelConfig.logLevel
+          value: warn
+        - name: tunnelConfig.transportLogLevel
+          value: warn
+        - name: tunnelConfig.name
+          value: pegasus
+        - name: replica.allNodes
+          value: "false"
+        - name: replica.count
+          value: "1"
+        - name: securityContext.capabilities
+          value: "null"
+      values: |-
+        ingress:
+          - hostname: "*.jynolen.fr"
+            service: https://envoy-proxy.envoy-gateway-system.svc.cluster.local:443
+            originRequest:
+              originServerName: internal.gw.jynolen.fr
+          - service: http_status:404
+  - repoURL: https://github.com/jynolen/peros-cluster
+    path: cloudflared
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cloudflare-operator-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

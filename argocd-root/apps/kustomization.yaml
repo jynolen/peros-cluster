@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - argocd-apps.yaml
+  - argocd.yaml
+  - envoy-gateway.yaml
+  - sealed-secrets.yaml
+  - cloudflared.yaml
+  - cert-manager.yaml
+  - external-dns.yaml
+  - cluster-gateway.yaml
+  - longhorn.yaml
+  - postgresql.yaml
+  - keycloak.yaml
+  - reflector.yaml
+  - external-secrets.yaml

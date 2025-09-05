@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: https://charts.jetstack.io
+    targetRevision: v1.18.2
+    chart: cert-manager
+    helm:
+      parameters:
+      - name: crds.enabled
+        value: "true"
+      - name: config.enableGatewayAPI
+        value: "true"
+      - name: config.kind
+        value: ControllerConfiguration
+      - name: config.apiVersion
+        value: controller.config.cert-manager.io/v1alpha1
+      - name: extraArgs[0]
+        value: --dns01-recursive-nameservers-only
+      - name: extraArgs[1]
+        value: --dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53
+  - repoURL: https://charts.jetstack.io
+    targetRevision: v0.19.0
+    chart: trust-manager
+    helm: {}
+  - repoURL: https://github.com/jynolen/peros-cluster
+    path: cert-manager
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

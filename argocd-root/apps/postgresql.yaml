@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloudnative-pg
+  namespace: argocd
+spec:
+  project: default
+  sources:
+  - repoURL: https://cloudnative-pg.github.io/charts
+    targetRevision: 0.26.0
+    chart: cloudnative-pg
+    helm: {}
+  - repoURL: https://github.com/jynolen/peros-cluster
+    path: postgresql
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: postgresql-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

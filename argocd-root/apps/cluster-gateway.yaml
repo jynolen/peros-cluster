@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-gateway
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/jynolen/peros-cluster
+    path: gateway/cluster
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: envoy-gateway-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

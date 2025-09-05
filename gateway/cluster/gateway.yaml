@@ -1,0 +1,76 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy-proxy
+spec:
+  # telemetry:
+  #   accessLog:
+  #     disable: false
+  #     settings:
+  #     - type: "Route"
+  #       sinks:
+  #       - type: File
+  #         file: 
+  #           path: /dev/stdout
+  logging:
+    level:
+      default: warn
+  provider:
+    kubernetes:
+      envoyService:
+        name: envoy-proxy
+        externalTrafficPolicy: Local
+        type: ClusterIP
+    type: Kubernetes
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: envoy-gateway
+spec:
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: envoy-proxy
+    namespace: envoy-gateway-system
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-jynolen-tls
+spec:
+  dnsNames:
+  - "*.jynolen.fr"
+  - internal.gw.jynolen.fr
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: acme-issuer
+  secretName: wildcard-jynolen-tls
+  usages:
+  - digital signature
+  - key encipherment
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: envoy-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/target: gw.jynolen.fr
+spec:
+  gatewayClassName: envoy-gateway
+  listeners:
+    - name: https
+      protocol: HTTPS
+      hostname: "*.jynolen.fr"
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        mode: Terminate
+        certificateRefs:
+        - name: wildcard-jynolen-tls
+          group: ''	
+          kind: Secret

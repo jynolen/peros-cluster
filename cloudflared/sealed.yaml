@@ -1,0 +1,32 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: tunnel-secret-cert
+  namespace: cloudflare-operator-system
+spec:
+  encryptedData:
+    cert.pem: AgAPDqVObTv2hpdM+0n3DdLIaSqxKi0Vu/BPY8gXvt/VdsqYVvKlGwHPvz3t2F9VkbK/ayKzfDdsJ0jBwgksKGBAICDWy9j74Eh0ZYhCPLy97n3ZBARgISqPHZF8jJ6cBuzNE6mABAo6F9yLD7DvYvHjvvBSWQt0K80Mj4TIzs+DIsCFTIff6FY4EgrwEOGxSnx3iPplitQgIAXrqsZTkWukkjHOsqDUXeorPXAnTGlerAMSh5k3grc+SUve3Vh5NiJjUQF0eMwLR1vK8Qb4XUysshyVD564Mb6WBgOiruJ5QfNiCCgFQGWfaE6iJ03VfE/Nv1FiuCimaAbYLIixyj2QkHM4AjAfAL/NkHiJapEjRs1PDfvkztVbPqxE6wGoPB16Pf58HvhHNkko2c2tZBKJ27DhIBZ0SrfM5hUcbWk/5mkyoQgjfThl/4SIy29vOuQmjYNr+VArwOW/paVBh4OlePIoKeie05nXzUomDXvArJWkkgiubFISfwleKXzXbArxM+VgDwdepFrSivpaOb80t9BntbBRySNBUY+3NlLHwgN5QNzpu19n2XvoqW4YDaL6XchDp9TIVeQhByubJZyJc3QkjXoxlAF9EmHZoFv1/1mL5Hli1VVYTOft+kltLt/RbE07mV1lRiG4BK/dGOPVEXXjaJs22uEzFBPjYytX6uLYbuPxgX/P27uZX154cqQEooDa4m1WI0Rtcu5WO3yC7lVTWBpgz833OJn3ZLIz9rVhfZtlYUrB9rKsS/sJQEtYVIHJiEJb7HRMb6D+5nLNYizJt3Obg56f8RqUD4V7Am6iL2mdhhb6UaygJeB8a9KjMYJeXglTYNIarcREF7t9ZxbtAgTc5u4OS0bWrvyG+o3wdedX9+93wFD4UXGVqNAtLGxvMCnPMSQGi9uUCYUtKuO973sI48qEJVct8jbLrIKjC5i8A/WWX5suDuB9MGzTLKuL9WNYBjc0Fo6kC+79ANzuG/vTfm4LhOcmLaQnqW/0JkWV6kKHHLX5bfZff3l5eoCY2OumGjeScmSl/mfiK8ed5NHtB6gCjA==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: tunnel-secret-cert
+      namespace: cloudflare-operator-system
+    type: Opaque
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: tunnel-secret-credential
+  namespace: cloudflare-operator-system
+spec:
+  encryptedData:
+    credentials.json: AgAzeswTxVoEMNGicd9/gEMEM5aQxKeIaBys10+S686V/Ujefkpk3HjZc/XD/1/hcu0mWeU+yqAttXKJxzJFdtNv4nfz/4f8UaacvqISBxs7ydvO7JF6A+kcKWubBCzDGJo1q7jjQ+M4S0h1E7IuiRjCOKGAgLbxbaCLiH4j1V3Qg3b+j4RalssasFIX6XftDgg56LLzOcPvvsVW6bRqr873I6c3YDbje2s9OZEsvPJbWOiP00+epjYGPjcBefq+dBbNnrt46FnSt//YbF6bYLjRATnpyAU/wZgjdQKKBiJPimHVA2pusNn/AYcJeOMD5P/jq6NZ2lacmYlV0p66qymR0sGsCBnvYefwYaJP3xEzdqchsHWC9f4T1Zxn0u1IT4SAnHanhZQXumR22LaozXZv5gNewNBfCm+9bBZTb1ITdUuXhmZYg/xYws37o3Wpk8V7zihqeTjU+ow2ACjl0tC7b/k7xZs8yxLSgUumffYi2rkaff+Ivnm+dzLSq6xzRA+uA6Dx2CX4Rf3vESPXap9d6jrvLyLFvwg5UkX6/0Qxa+GLo0rA/h7deyQ96ewhMsVCN872z/AoPn9csfJG2FNKz3d3OrEOGxLE1rVN9tmcQZy7U8S0PvgJ6DV0QHlPmlbB1IvNfdlG94SQZsTNUW39rIPzY5X9ElkZulVyQlWU+XgFdu0rf2YxXBjbEIoJqMfJvh2EdpiSxkpv8N2kIrYHLk2TCsd4HP6NPvGB87MiOMskTeQZKsS8KRMmo5YNQ9Ttz00XyiEBlSpADYOQyH2W/MgrSr5obYjyJ/my55RqKwTQy8ZOJIDM7Jl/3d8zAPT2F4QbUQGrEOfi2PmqRXGUt8lg4eMsxegMyIKicqvyCBVZFP4fmA+TY+EEfZn1yYDNyfjNZ8I9q4SGzj/mVySs7f9GayuI7g2tCVRwy7Bm
+  template:
+    metadata:
+      creationTimestamp: null
+      name: tunnel-secret-credential
+      namespace: cloudflare-operator-system
+    type: Opaque
