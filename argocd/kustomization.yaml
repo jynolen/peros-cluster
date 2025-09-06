@@ -14,3 +14,9 @@ configMapGenerator:
       - server.insecure=true
     options:
       disableNameSuffixHash: true
+  - name: argocd-cm
+    behavior: merge
+    files:
+      - oidc.config
+    options:
+      disableNameSuffixHash: true
