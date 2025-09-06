@@ -26,5 +26,12 @@ configMapGenerator:
     options:
       disableNameSuffixHash: true
 
-
-
+patches:
+- target:
+    group: apiextensions.k8s.io
+    version: v1
+    kind: CustomResourceDefinition
+  patch: |-
+    - op: add
+      path: /metadata/annotations/rgocd.argoproj.io~1sync-options
+      value: "ServerSideApply=true"
