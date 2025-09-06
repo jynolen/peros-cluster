@@ -19,6 +19,9 @@ spec:
   http:
     httpEnabled: true
   hostname:
+    hostname: keycloak.jynolen.fr
     strict: false
   proxy:
     headers: xforwarded # double check your reverse proxy sets and overwrites the X-Forwarded-* headers
+  features:
+    enabled: []
