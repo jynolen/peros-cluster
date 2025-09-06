@@ -6,6 +6,9 @@ namespace: argocd
 resources:
 - namespace.yaml
 - https://github.com/argoproj/argo-cd.git//manifests/cluster-install?ref=v3.1.1
+- https://github.com/kubernetes-sigs/gateway-api.git/config/crd?ref=v1.3.0
+- https://github.com/kubernetes-sigs/gateway-api.git/config/crd/experimental?ref=v1.3.0
+- route.yaml
 
 configMapGenerator:
   - name: argocd-cmd-params-cm
@@ -16,7 +19,12 @@ configMapGenerator:
       disableNameSuffixHash: true
   - name: argocd-cm
     behavior: merge
+    literals:
+      - url=https://argocd.jynolen.fr
     files:
       - oidc.config
     options:
       disableNameSuffixHash: true
+
+
+
