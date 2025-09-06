@@ -47,3 +47,9 @@ spec:
         - path:
             type: PathPrefix
             value: /keycloak
+      filters:
+      - type: URLRewrite
+        urlRewrite:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /
