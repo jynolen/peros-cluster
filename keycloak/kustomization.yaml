@@ -4,3 +4,7 @@ kind: Kustomization
 resources:
 - operator
 - instance
+- ns.yaml
+
+transformers:
+- transformer.ns.yaml
