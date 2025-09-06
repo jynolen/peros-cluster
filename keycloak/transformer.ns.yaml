@@ -1,6 +1,6 @@
 apiVersion: builtin
 kind: NamespaceTransformer
 metadata:
-  name: -
+  name: notImportantHere
   namespace: keycloak
 unsetOnly: true
