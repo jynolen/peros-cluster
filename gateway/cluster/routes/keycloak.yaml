@@ -35,7 +35,7 @@ spec:
       name: envoy-proxy
       namespace: envoy-gateway-system
   hostnames:
-    - "management-keycloak.jynolen.fr"
+    - "management.jynolen.fr"
   rules:
     - backendRefs:
         - group: ""
@@ -46,4 +46,4 @@ spec:
       matches:
         - path:
             type: PathPrefix
-            value: /
+            value: /keycloak
