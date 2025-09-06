@@ -7,6 +7,3 @@ resources:
 - keycloak.yaml
 - database.yaml
 - password.yaml
-
-transformers:
-- transformer.ns.yaml
