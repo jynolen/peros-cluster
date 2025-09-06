@@ -1,8 +1,8 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: argocd-server
-  namespace: argocd
+  name: keycloak
+  namespace: keycloak
 spec:
   parentRefs:
     - group: gateway.networking.k8s.io	
@@ -15,8 +15,33 @@ spec:
     - backendRefs:
         - group: ""
           kind: Service
-          name: argocd-server
-          port: 80
+          name: keycloak-service
+          port: 8080
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  parentRefs:
+    - group: gateway.networking.k8s.io	
+      kind: Gateway
+      name: envoy-proxy
+      namespace: envoy-gateway-system
+  hostnames:
+    - "management.keycloak.jynolen.fr"
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: keycloak-service
+          port: 9000
           weight: 1
       matches:
         - path:
