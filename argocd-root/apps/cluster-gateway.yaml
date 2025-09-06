@@ -5,9 +5,12 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/jynolen/peros-cluster
+  sources:
+  - repoURL: https://github.com/jynolen/peros-cluster
     path: gateway/cluster
+    targetRevision: HEAD
+  - repoURL: https://github.com/jynolen/peros-cluster
+    path: gateway/cluster/routes
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
