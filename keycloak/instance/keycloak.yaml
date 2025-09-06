@@ -1,16 +1,37 @@
----
+# ---
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: keycloack-crt
+# spec:
+#   dnsNames:
+#   - keycloak.jynolen.fr
+#   issuerRef:
+#     group: cert-manager.io
+#     kind: ClusterIssuer
+#     name: acme-issuer
+#   secretName: keycloack-crt
+#   usages:
+#   - digital signature
+#   - key encipherment
+# ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: keycloack-crt
+  name: keycloack-crt-local
 spec:
   dnsNames:
   - keycloak.jynolen.fr
+  - localhost
+  - keycloack
+  - keycloack-service
+  - keycloack-service.keycloack
+  - keycloack-service.keycloack.svc.cluster.local
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer
     name: acme-issuer
-  secretName: keycloack-crt
+  secretName: keycloack-crt-local
   usages:
   - digital signature
   - key encipherment
@@ -34,7 +55,7 @@ spec:
   ingress:
     enabled: false
   http:
-    tlsSecret: keycloack-crt
+    tlsSecret: keycloack-crt-local
   hostname:
     hostname: keycloak.jynolen.fr
   proxy:
