@@ -77,7 +77,7 @@ spec:
   subjectRef:
     oidc:
       userClaim: email
-      groupsClaim: roles
+      groupClaim: roles
       tokenMaxTTL: 3600
       verboseOidcLogging: true
       allowedRedirectUris:
