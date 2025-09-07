@@ -12,7 +12,10 @@ spec:
   - path: .
     repoURL: oci://ghcr.io/appscode-charts/kubevault-operator
     targetRevision: v0.22.0
-    helm: {}
+    helm:
+      parameters:
+      - name: licenseSecretName
+        value: kubedb-licence
   - path: .
     repoURL: oci://ghcr.io/appscode-charts/kubevault-catalog
     targetRevision: v2025.5.30
@@ -25,6 +28,9 @@ spec:
     repoURL: oci://ghcr.io/appscode-charts/kubevault-webhook-server
     targetRevision: v0.22.0
     helm: {}
+  - repoURL: https://github.com/jynolen/peros-cluster
+    path: kubevault
+    targetRevision: HEAD
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
