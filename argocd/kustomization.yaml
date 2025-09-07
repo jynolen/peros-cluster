@@ -25,7 +25,7 @@ configMapGenerator:
   - name: argocd-rbac-cm
     behavior: merge
     literals:
-      - scopes="[groups, roles:argocd]"
+      - scopes="[roles]"
     files:
       - policy.csv
     options:
