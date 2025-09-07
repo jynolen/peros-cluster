@@ -24,6 +24,8 @@ configMapGenerator:
       disableNameSuffixHash: true
   - name: argocd-rbac-cm
     behavior: merge
+    literals:
+      - scopes="[groups, email, roles.argocd]"
     files:
       - policy.csv
     options:
