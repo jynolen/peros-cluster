@@ -26,6 +26,9 @@ spec:
           value: "1"
         - name: csi.snapshotterReplicaCount
           value: "1"
+  - repoURL: https://github.com/jynolen/peros-cluster
+    path: longhorn
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: longhorn-system
