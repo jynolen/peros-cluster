@@ -80,4 +80,5 @@ spec:
       groupsClaim: roles
       tokenMaxTTL: 3600
       verboseOidcLogging: true
-      allowedRedirectUris: http://vault.jynolen.fr/ui/vault/auth/oidc/oidc/callback
+      allowedRedirectUris:
+      - http://vault.jynolen.fr/ui/vault/auth/oidc/oidc/callback
