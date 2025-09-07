@@ -19,5 +19,6 @@ spec:
       oidcConfig:
         oidcDiscoveryURL: https://keycloak.jynolen.fr/realms/kubernetes
         oidcClientID: vault
-        credentialSecretRef: vault-oidc-secret
+        credentialSecretRef:
+          name: vault-oidc-secret
         defaultRole: admin
