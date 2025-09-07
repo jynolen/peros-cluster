@@ -30,10 +30,6 @@ spec:
   #   repoURL: oci://ghcr.io/appscode-charts/kubevault-opscenter
   #   targetRevision: v2025.5.30
   #   helm: {}
-  - path: .
-    repoURL: oci://ghcr.io/appscode-charts/kubevault-webhook-server
-    targetRevision: v0.22.0
-    helm: {}
   - repoURL: https://github.com/jynolen/peros-cluster
     path: kubevault
     targetRevision: HEAD

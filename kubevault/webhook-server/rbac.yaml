@@ -1,0 +1,150 @@
+---
+# Source: kubevault-webhook-server/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubevault-kubevault-webhook-server
+
+---
+# Source: kubevault-webhook-server/templates/cluster-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubevault-kubevault-webhook-server
+
+rules:
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs: ["*"]
+- apiGroups:
+  - apiregistration.k8s.io
+  resources:
+  - apiservices
+  verbs: ["get"]
+- apiGroups:
+  - admissionregistration.k8s.io
+  resources:
+  - mutatingwebhookconfigurations
+  - validatingwebhookconfigurations
+  verbs: ["get", "list", "watch", "patch"]
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs: ["get"]
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs: ["create"]
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - namespaces
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs: ["get"]
+- apiGroups:
+  - kubevault.com
+  - catalog.kubevault.com
+  - engine.kubevault.com
+  - policy.kubevault.com
+  resources:
+  - "*"
+  verbs: ["get", "list", "watch"]
+- apiGroups:
+  - appcatalog.appscode.com
+  resources:
+  - "*"
+  verbs: ["*"]
+---
+# Source: kubevault-webhook-server/templates/cluster-role-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubevault-kubevault-webhook-server
+
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubevault-kubevault-webhook-server
+subjects:
+- kind: ServiceAccount
+  name: kubevault-kubevault-webhook-server
+
+---
+# Source: kubevault-webhook-server/templates/webhook-eas-rbac.yaml
+# to delegate authentication and authorization
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubevault-kubevault-webhook-server-apiserver-auth-delegator
+
+roleRef:
+  kind: ClusterRole
+  apiGroup: rbac.authorization.k8s.io
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: kubevault-kubevault-webhook-server
+
+---
+# Source: kubevault-webhook-server/templates/webhook-eas-rbac.yaml
+# to read the config for terminating authentication
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kubevault-kubevault-webhook-server-apiserver-extension-server-authentication-reader
+  namespace: kube-system
+
+roleRef:
+  kind: Role
+  apiGroup: rbac.authorization.k8s.io
+  name: extension-apiserver-authentication-reader
+subjects:
+- kind: ServiceAccount
+  name: kubevault-kubevault-webhook-server
+
+---
+# Source: kubevault-webhook-server/templates/garbage-collector-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: kubevault:garbage-collector:psp
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+rules:
+- apiGroups:
+  - policy
+  verbs: ["use"]
+  resources:
+  - podsecuritypolicies
+---
+# Source: kubevault-webhook-server/templates/garbage-collector-rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kubevault:garbage-collector:psp
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubevault:garbage-collector:psp
+subjects:
+- kind: ServiceAccount
+  name: generic-garbage-collector

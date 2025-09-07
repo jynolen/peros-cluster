@@ -1,0 +1,23 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kubevault-kubevault-webhook-server-apiserver-cert
+spec:
+  dnsNames:
+  - kubevault-kubevault-webhook-server
+  - kubevault-kubevault-webhook-server.vault-system
+  - kubevault-kubevault-webhook-server.vault-system.svc.cluster.local
+  - mutators.engine.kubevault.com
+  - vaultserverwebhook.mutators.kubevault.com
+  - vaultpolicybindingwebhook.mutators.policy.kubevault.com
+  - vaultserverwebhook.validators.kubevault.com
+  - secretaccessrequestwebhook.validators.engine.kubevault.com
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cluster-root-ca
+  secretName: kubevault-kubevault-webhook-server-apiserver-cert
+  usages:
+  - digital signature
+  - key encipherment

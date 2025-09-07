@@ -1,0 +1,78 @@
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.validators.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+spec:
+  group: validators.kubevault.com
+  version: v1alpha1
+  service:
+    namespace: vault-system
+    name: kubevault-kubevault-webhook-server
+  groupPriorityMinimum: 10000
+  versionPriority: 15
+---
+# Source: kubevault-webhook-server/templates/apiregistration.yaml
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.mutators.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+spec:
+  group: mutators.kubevault.com
+  version: v1alpha1
+  service:
+    namespace: vault-system
+    name: kubevault-kubevault-webhook-server
+  groupPriorityMinimum: 10000
+  versionPriority: 15
+---
+# Source: kubevault-webhook-server/templates/apiregistration.yaml
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.validators.engine.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+spec:
+  group: validators.engine.kubevault.com
+  version: v1alpha1
+  service:
+    namespace: vault-system
+    name: kubevault-kubevault-webhook-server
+  groupPriorityMinimum: 10000
+  versionPriority: 15
+---
+# Source: kubevault-webhook-server/templates/apiregistration.yaml
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.mutators.engine.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+spec:
+  group: mutators.engine.kubevault.com
+  version: v1alpha1
+  service:
+    namespace: vault-system
+    name: kubevault-kubevault-webhook-server
+  groupPriorityMinimum: 10000
+  versionPriority: 15
+---
+# Source: kubevault-webhook-server/templates/apiregistration.yaml
+apiVersion: apiregistration.k8s.io/v1
+kind: APIService
+metadata:
+  name: v1alpha1.mutators.policy.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+spec:
+  group: mutators.policy.kubevault.com
+  version: v1alpha1
+  service:
+    namespace: vault-system
+    name: kubevault-kubevault-webhook-server
+  groupPriorityMinimum: 10000
+  versionPriority: 15

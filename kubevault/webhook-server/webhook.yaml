@@ -1,0 +1,144 @@
+# Source: kubevault-webhook-server/templates/core/mutating-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: mutators.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+webhooks:
+- name: vaultserverwebhook.mutators.kubevault.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.kubevault.com/v1alpha1/vaultserverwebhooks
+  rules:
+  - operations:
+    - CREATE
+    - UPDATE
+    apiGroups:
+    - kubevault.com
+    apiVersions:
+    - "*"
+    resources:
+    - vaultservers
+  admissionReviewVersions: ["v1beta1"]
+  failurePolicy: Ignore
+  sideEffects: None
+---
+# Source: kubevault-webhook-server/templates/engine/mutating-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: mutators.engine.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+webhooks:
+- name: secretaccessrequestwebhook.mutators.engine.kubevault.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.engine.kubevault.com/v1alpha1/secretaccessrequestwebhooks
+  rules:
+  - operations:
+    - CREATE
+    - UPDATE
+    apiGroups:
+    - engine.kubevault.com
+    apiVersions:
+    - "*"
+    resources:
+    - secretaccessrequests
+  admissionReviewVersions: ["v1beta1"]
+  failurePolicy: Ignore
+  sideEffects: None
+---
+# Source: kubevault-webhook-server/templates/policy/mutating-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: mutators.policy.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+webhooks:
+- name: vaultpolicybindingwebhook.mutators.policy.kubevault.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/mutators.policy.kubevault.com/v1alpha1/vaultpolicybindingwebhooks
+    caBundle: dW5rbm93bg==
+  rules:
+  - operations:
+    - CREATE
+    - UPDATE
+    apiGroups:
+    - policy.kubevault.com
+    apiVersions:
+    - "*"
+    resources:
+    - vaultpolicybindings
+  admissionReviewVersions: ["v1beta1"]
+  failurePolicy: Ignore
+  sideEffects: None
+---
+# Source: kubevault-webhook-server/templates/core/validating-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: validators.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+webhooks:
+- name: vaultserverwebhook.validators.kubevault.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.kubevault.com/v1alpha1/vaultserverwebhooks
+    caBundle: dW5rbm93bg==
+  rules:
+  - operations:
+    - CREATE
+    - UPDATE
+    - DELETE
+    apiGroups:
+    - kubevault.com
+    apiVersions:
+    - "*"
+    resources:
+    - vaultservers
+  admissionReviewVersions: ["v1beta1"]
+  failurePolicy: Ignore
+  sideEffects: None
+---
+# Source: kubevault-webhook-server/templates/engine/validating-webhook.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: validators.engine.kubevault.com
+  annotations:
+    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+webhooks:
+- name: secretaccessrequestwebhook.validators.engine.kubevault.com
+  clientConfig:
+    service:
+      namespace: default
+      name: kubernetes
+      path: /apis/validators.engine.kubevault.com/v1alpha1/secretaccessrequestwebhooks
+    caBundle: dW5rbm93bg==
+  rules:
+  - operations:
+    - CREATE
+    - UPDATE
+    apiGroups:
+    - engine.kubevault.com
+    apiVersions:
+    - "*"
+    resources:
+    - secretaccessrequests
+  admissionReviewVersions: ["v1beta1"]
+  failurePolicy: Ignore
+  sideEffects: None
+---

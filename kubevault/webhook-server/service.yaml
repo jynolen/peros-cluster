@@ -1,0 +1,15 @@
+---
+# Source: kubevault-webhook-server/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubevault-kubevault-webhook-server
+
+spec:
+  ports:
+  - name: operator
+    port: 443
+    targetPort: operator
+  selector:
+    app.kubernetes.io/name: kubevault-webhook-server
+    app.kubernetes.io/instance: kubevault

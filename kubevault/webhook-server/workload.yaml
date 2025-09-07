@@ -1,0 +1,75 @@
+# Source: kubevault-webhook-server/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubevault-kubevault-webhook-server
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubevault-webhook-server
+      app.kubernetes.io/instance: kubevault
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kubevault-webhook-server
+        app.kubernetes.io/instance: kubevault
+    spec:
+      serviceAccountName: kubevault-kubevault-webhook-server
+      containers:
+      - name: operator
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 65534
+          seccompProfile:
+            type: RuntimeDefault
+        image: ghcr.io/kubevault/vault-operator:v0.22.0
+        imagePullPolicy: IfNotPresent
+        args:
+        - run
+        - --v=3
+        - --secure-port=8443
+        - --audit-log-path=-
+        - --cluster-name=
+        - --tls-cert-file=/var/serving-cert/tls.crt
+        - --tls-private-key-file=/var/serving-cert/tls.key
+        - --authorization-always-allow-paths=/healthz,/readyz,/livez,/convert
+        - --enable-mutating-webhook=true
+        - --enable-validating-webhook=true
+        - --use-kubeapiserver-fqdn-for-aks=true
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        ports:
+        - name: operator
+          containerPort: 8443
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpdir
+        - mountPath: /var/serving-cert
+          name: serving-cert
+        resources: {}
+      volumes:
+      - name: tmpdir
+        emptyDir: {}
+      - name: serving-cert
+        secret:
+          defaultMode: 420
+          secretName: kubevault-kubevault-webhook-server-apiserver-cert
+      securityContext:
+        {}
+      nodeSelector:
+        kubernetes.io/os: linux
+---
