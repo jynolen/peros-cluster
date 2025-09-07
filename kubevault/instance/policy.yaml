@@ -78,6 +78,5 @@ spec:
     oidc:
       userClaim: email
       groupsClaim: roles
-      tokenPolicies: admin
       tokenMaxTTL: 3600
       verboseOidcLogging: true
