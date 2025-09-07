@@ -10,9 +10,25 @@ spec:
   project: default
   sources:
   - path: .
-    repoURL: oci://ghcr.io/appscode-charts/kubevault
-    targetRevision: v2025.5.30
+    repoURL: oci://ghcr.io/appscode-charts/kubevault-operator
+    targetRevision: v0.22.0
     helm: {}
+  # - path: .
+  #   repoURL: oci://ghcr.io/appscode-charts/kubevault-catalog
+  #   targetRevision: v2025.5.30
+  #   helm: {}
+  # - path: .
+  #   repoURL: oci://ghcr.io/appscode-charts/kubevault-catalog
+  #   targetRevision: v2025.5.30
+  #   helm: {}
+  # - path: .
+  #   repoURL: oci://ghcr.io/appscode-charts/kubevault-opscenter
+  #   targetRevision: v2025.5.30
+  #   helm: {}
+  # - path: .
+  #   repoURL: oci://ghcr.io/appscode-charts/kubevault-webhook-server
+  #   targetRevision: v0.22.0
+  #   helm: {}
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
