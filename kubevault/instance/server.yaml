@@ -22,3 +22,5 @@ spec:
         credentialSecretRef:
           name: vault-oidc-secret
         defaultRole: admin
+    - path: kubernetes	
+      type: kubernetes
