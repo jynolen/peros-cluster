@@ -10,3 +10,4 @@ resources:
 - namespace.yaml
 - server.yaml
 - routes.yaml
+- policy.yaml
