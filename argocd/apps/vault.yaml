@@ -10,16 +10,22 @@ spec:
   project: default
   sources:
   - path: .
+    repoURL: oci://ghcr.io/appscode-charts/kubevault-crds
+    targetRevision: v2025.5.30
+    helm: {}
+  - path: .
     repoURL: oci://ghcr.io/appscode-charts/kubevault-operator
     targetRevision: v0.22.0
     helm:
+      skipCrds: true
       parameters:
       - name: licenseSecretName
         value: kubedb-licence
   - path: .
     repoURL: oci://ghcr.io/appscode-charts/kubevault-catalog
     targetRevision: v2025.5.30
-    helm: {}
+    helm:
+      skipCrds: true
   # - path: .
   #   repoURL: oci://ghcr.io/appscode-charts/kubevault-opscenter
   #   targetRevision: v2025.5.30
