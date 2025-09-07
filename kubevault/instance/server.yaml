@@ -13,3 +13,11 @@ spec:
     mode:
       kubernetesSecret:
         secretName: vault-keys
+  authMethods:
+    - type: oidc
+      path: oidc
+      oidcConfig:
+        oidcDiscoveryURL: https://keycloak.jynolen.fr/realms/kubernetes
+        oidcClientID: vault
+        credentialSecretRef: vault-oidc-secret
+        defaultRole: admin
