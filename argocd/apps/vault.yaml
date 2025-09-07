@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubevault
+  namespace: argocd
+spec:
+  destination:
+    namespace: vault-system
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+  - path: .
+    repoURL: oci://ghcr.io/appscode-charts/kubevault
+    targetRevision: v2025.5.30
+    helm: {}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
