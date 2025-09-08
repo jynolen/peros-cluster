@@ -39,3 +39,4 @@ spec:
       name: "echoserver-oidc-secret"
     redirectURL: "https://echo.jynolen.fr/oauth2/callback"
     logoutPath: "/logout"
+    forwardAccessToken: true
