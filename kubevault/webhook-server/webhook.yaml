@@ -4,7 +4,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: mutators.kubevault.com
   annotations:
-    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+    cert-manager.io/inject-ca-from: vault-system/kubevault-kubevault-webhook-server-apiserver-cert
 webhooks:
 - name: vaultserverwebhook.mutators.kubevault.com
   clientConfig:
@@ -32,7 +32,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: mutators.engine.kubevault.com
   annotations:
-    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+    cert-manager.io/inject-ca-from: vault-system/kubevault-kubevault-webhook-server-apiserver-cert
 webhooks:
 - name: secretaccessrequestwebhook.mutators.engine.kubevault.com
   clientConfig:
@@ -60,7 +60,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: mutators.policy.kubevault.com
   annotations:
-    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+    cert-manager.io/inject-ca-from: vault-system/kubevault-kubevault-webhook-server-apiserver-cert
 webhooks:
 - name: vaultpolicybindingwebhook.mutators.policy.kubevault.com
   clientConfig:
@@ -88,7 +88,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: validators.kubevault.com
   annotations:
-    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+    cert-manager.io/inject-ca-from: vault-system/kubevault-kubevault-webhook-server-apiserver-cert
 webhooks:
 - name: vaultserverwebhook.validators.kubevault.com
   clientConfig:
@@ -117,7 +117,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: validators.engine.kubevault.com
   annotations:
-    cert-manager.io/inject-ca-from: kubevault-kubevault-webhook-server-apiserver-cert
+    cert-manager.io/inject-ca-from: vault-system/kubevault-kubevault-webhook-server-apiserver-cert
 webhooks:
 - name: secretaccessrequestwebhook.validators.engine.kubevault.com
   clientConfig:
