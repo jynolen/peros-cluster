@@ -4,14 +4,12 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: kubevault-kubevault-webhook-server
-
 ---
 # Source: kubevault-webhook-server/templates/cluster-role.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: kubevault-kubevault-webhook-server
-
 rules:
 - apiGroups:
   - apiextensions.k8s.io
@@ -55,6 +53,7 @@ rules:
   - ""
   resources:
   - secrets
+  - conffigmaps
   verbs: ["get"]
 - apiGroups:
   - kubevault.com
@@ -75,7 +74,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: kubevault-kubevault-webhook-server
-
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -83,7 +81,6 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kubevault-kubevault-webhook-server
-
 ---
 # Source: kubevault-webhook-server/templates/webhook-eas-rbac.yaml
 # to delegate authentication and authorization
@@ -99,7 +96,6 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kubevault-kubevault-webhook-server
-
 ---
 # Source: kubevault-webhook-server/templates/webhook-eas-rbac.yaml
 # to read the config for terminating authentication
@@ -108,7 +104,6 @@ kind: RoleBinding
 metadata:
   name: kubevault-kubevault-webhook-server-apiserver-extension-server-authentication-reader
   namespace: kube-system
-
 roleRef:
   kind: Role
   apiGroup: rbac.authorization.k8s.io
@@ -116,7 +111,6 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kubevault-kubevault-webhook-server
-
 ---
 # Source: kubevault-webhook-server/templates/garbage-collector-rbac.yaml
 apiVersion: rbac.authorization.k8s.io/v1
