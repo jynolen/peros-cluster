@@ -33,7 +33,7 @@ spec:
       name: echoserver
   oidc:
     provider:
-      issuer: "https://keycloak.jynolen.fr/admin/kubernetes"
+      issuer: "https://keycloak.jynolen.fr/realms/kubernetes"
     clientID: "echoserver"
     clientSecret:
       name: "echoserver-oidc-secret"
