@@ -33,10 +33,9 @@ spec:
       name: echoserver
   oidc:
     provider:
-      issuer: "https://accounts.google.com"
+      issuer: "https://keycloak.jynolen.fr/admin/kubernetes"
     clientID: "echoserver"
     clientSecret:
       name: "echoserver-oidc-secret"
     redirectURL: "https://echo.jynolen.fr/oauth2/callback"
     logoutPath: "/logout"
-    forwardAccessToken: true
