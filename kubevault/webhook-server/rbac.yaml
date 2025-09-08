@@ -54,7 +54,7 @@ rules:
   resources:
   - secrets
   - conffigmaps
-  verbs: ["get"]
+  verbs: ["get", "list", "watch"]
 - apiGroups:
   - kubevault.com
   - catalog.kubevault.com
