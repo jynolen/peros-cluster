@@ -7,6 +7,7 @@ spec:
   dnsNames:
   - kubevault-kubevault-webhook-server
   - kubevault-kubevault-webhook-server.vault-system
+  - kubevault-kubevault-webhook-server.vault-system.svc
   - kubevault-kubevault-webhook-server.vault-system.svc.cluster.local
   - mutators.engine.kubevault.com
   - vaultserverwebhook.mutators.kubevault.com
