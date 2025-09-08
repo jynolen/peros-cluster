@@ -64,21 +64,3 @@ spec:
     {
       capabilities = ["read"]
     }
----
-apiVersion: policy.kubevault.com/v1alpha1
-kind: VaultPolicyBinding
-metadata:
-  name: admin-role
-spec:
-  vaultRef:
-    name: vault
-  policies:
-  - ref: admin
-  subjectRef:
-    oidc:
-      userClaim: email
-      groupClaim: roles
-      tokenMaxTTL: 3600
-      verboseOidcLogging: true
-      allowedRedirectUris:
-      - http://vault.jynolen.fr/ui/vault/auth/oidc/oidc/callback

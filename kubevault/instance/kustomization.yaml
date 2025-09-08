@@ -11,3 +11,4 @@ resources:
 - server.yaml
 - routes.yaml
 - policy.yaml
+- roles.yaml
