@@ -53,7 +53,7 @@ rules:
   - ""
   resources:
   - secrets
-  - conffigmaps
+  - configmaps
   verbs: ["get", "list", "watch"]
 - apiGroups:
   - kubevault.com
