@@ -4,4 +4,4 @@ metadata:
   name: keycloak
 spec:
   finalizers:
-  - kubernetes
+  - resources-finalizer.argocd.argoproj.io

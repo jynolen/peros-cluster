@@ -4,4 +4,4 @@ metadata:
   name: vault
 spec:
   finalizers:
-  - kubernetes
+  - resources-finalizer.argocd.argoproj.io
