@@ -21,3 +21,21 @@ spec:
         - path:
             type: PathPrefix
             value: /
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: echoserver
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: echoserver
+  oidc:
+    provider:
+      issuer: "https://accounts.google.com"
+    clientID: "echoserver"
+    clientSecret:
+      name: "echoserver-oidc-secret"
+    redirectURL: "https://echo.jynolen.fr/oauth2/callback"
+    logoutPath: "/logout"
