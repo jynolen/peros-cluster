@@ -68,7 +68,6 @@ webhooks:
       namespace: default
       name: kubernetes
       path: /apis/mutators.policy.kubevault.com/v1alpha1/vaultpolicybindingwebhooks
-
   rules:
   - operations:
     - CREATE
@@ -97,7 +96,6 @@ webhooks:
       namespace: default
       name: kubernetes
       path: /apis/validators.kubevault.com/v1alpha1/vaultserverwebhooks
-
   rules:
   - operations:
     - CREATE
@@ -127,7 +125,6 @@ webhooks:
       namespace: default
       name: kubernetes
       path: /apis/validators.engine.kubevault.com/v1alpha1/secretaccessrequestwebhooks
-
   rules:
   - operations:
     - CREATE
